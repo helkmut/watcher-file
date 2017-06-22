@@ -111,6 +111,7 @@ sub getsetposition {
                 logger("----------------------");
                 logger("|PROGRAM OUT: File rotate|");
                 logger("----------------------");
+                system("rm -f $dstfile");
                 $difflines = $newlines;
 
         } else {
@@ -150,7 +151,7 @@ sub exit_program {
 
         my $cmd;
 
-        $cmd=`\$\(which rm\) -rf $path/var/$name.pid`;
+        $cmd=`\$\(which rm\) -rf $path/var/$name-$opt_file.pid`;
 
         exit;
 
@@ -158,7 +159,7 @@ sub exit_program {
 
 sub check_pid {
 
-        if(-e "$path/var/$name.pid"){
+        if(-e "$path/var/$name-$opt_file.pid"){
 
                 return 0;
 
@@ -175,7 +176,7 @@ sub write_pid {
 
         my $cmd;
 
-        $cmd=`\$\(which touch\) $path/var/$name.pid`;
+        $cmd=`\$\(which touch\) $path/var/$name-$opt_file.pid`;
 
         return 1;
 
